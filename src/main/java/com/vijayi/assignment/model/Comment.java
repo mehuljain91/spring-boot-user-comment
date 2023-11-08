@@ -7,32 +7,32 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "comment")
 public class Comment {
-   
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
-    private Long commentId;
 
-    @Column(name = "message", nullable = false)
-    private String message;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "comment_id")
+	private Long commentId;
 
-    @Column(name = "comment_date_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date commentDateTime;
+	@Column(name = "message", nullable = false)
+	private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "posted_by_user_id")
-    private User postedByUser;
-    
-    public Comment() {
-    	
-    }
-    
-    public Comment(String message, Date commentDateTime, User postedByUser) {
-    	this.message = message;
-    	this.commentDateTime = commentDateTime;
-    	this.postedByUser = postedByUser;
-    }
+	@Column(name = "comment_date_time", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date commentDateTime;
+
+	@ManyToOne
+	@JoinColumn(name = "posted_by_user_id")
+	private User postedByUser;
+
+	public Comment() {
+
+	}
+
+	public Comment(String message, Date commentDateTime, User postedByUser) {
+		this.message = message;
+		this.commentDateTime = commentDateTime;
+		this.postedByUser = postedByUser;
+	}
 
 	public Long getCommentId() {
 		return commentId;
@@ -68,21 +68,23 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [message=" + message + ", commentDateTime=" + commentDateTime + ", postedByUser="
-				+ postedByUser + "]";
+		return "Comment [message=" + message + ", commentDateTime=" + commentDateTime + ", postedByUser=" + postedByUser
+				+ "]";
 	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comment comment = (Comment) o;
-        return Objects.equals(commentId, comment.commentId);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Comment comment = (Comment) o;
+		return Objects.equals(commentId, comment.commentId);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(commentId);
-    }
-    
+	@Override
+	public int hashCode() {
+		return Objects.hash(commentId);
+	}
+
 }

@@ -8,23 +8,23 @@ import jakarta.persistence.*;
 public class User {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
+	private Long userId;
 
-    @Column(name = "comment_from", nullable = false)
-    private String commentFrom;
+	@Column(name = "comment_from", nullable = false)
+	private String commentFrom;
 
-    @Column(name = "comment_to", nullable = false)
-    private String commentTo;
-    
-    public User() {
-    	
-    }
-    
-    public User(String commentTo) {
-    	this.commentTo = commentTo;
-    }
+	@Column(name = "comment_to", nullable = false)
+	private String commentTo;
+
+	public User() {
+
+	}
+
+	public User(String commentTo) {
+		this.commentTo = commentTo;
+	}
 
 	public Long getUserId() {
 		return userId;
@@ -50,17 +50,19 @@ public class User {
 		this.commentTo = commentTo;
 	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userId, user.userId);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		User user = (User) o;
+		return Objects.equals(userId, user.userId);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId);
-    }    
-    
+	@Override
+	public int hashCode() {
+		return Objects.hash(userId);
+	}
+
 }

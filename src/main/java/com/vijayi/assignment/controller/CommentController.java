@@ -20,26 +20,26 @@ public class CommentController {
 	private CommentService commentService;
 
 	@PostMapping("/add-comment")
-    public AddCommentResponse addComment(@RequestBody AddCommentRequest request) {
-        AddCommentResponse response = new AddCommentResponse();
-        try {
-            commentService.addComment(request.getCommentFrom(), request.getCommentTo(), request.getMessage());
-            response.setMessage("Comment added successfully");
-        } catch (Exception e) {
-            response.setMessage("Invalid Request");
-        }
-        return response;
-    }
+	public AddCommentResponse addComment(@RequestBody AddCommentRequest request) {
+		AddCommentResponse response = new AddCommentResponse();
+		try {
+			commentService.addComment(request.getCommentFrom(), request.getCommentTo(), request.getMessage());
+			response.setMessage("Comment added successfully");
+		} catch (Exception e) {
+			response.setMessage("Invalid Request");
+		}
+		return response;
+	}
 
 	@GetMapping("/get-comment")
-    public GetCommentResponse getComment(@RequestParam String commentTo) {
-        GetCommentResponse response = new GetCommentResponse();
-        try {
-            List<Comment> comments = commentService.getCommentsByRecipient(commentTo);
-            response.setComments(comments);
-        } catch (Exception e) {
-            response.setComments(Collections.emptyList());
-        }
-        return response;
-    }
+	public GetCommentResponse getComment(@RequestParam String commentTo) {
+		GetCommentResponse response = new GetCommentResponse();
+		try {
+			List<Comment> comments = commentService.getCommentsByRecipient(commentTo);
+			response.setComments(comments);
+		} catch (Exception e) {
+			response.setComments(Collections.emptyList());
+		}
+		return response;
+	}
 }

@@ -7,9 +7,9 @@ import com.vijayi.assignment.model.Comment;
 public class GetCommentResponse {
 
 	private List<Comment> comments;
-	
+
 	public GetCommentResponse() {
-		
+
 	}
 
 	public List<Comment> getComments() {
@@ -19,6 +19,5 @@ public class GetCommentResponse {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	
-	
+
 }

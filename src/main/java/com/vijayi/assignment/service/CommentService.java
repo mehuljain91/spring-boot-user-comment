@@ -19,45 +19,45 @@ public class CommentService {
 
 	@Autowired
 	private CommentRepository commentRepository;
-	
-	@Autowired 
+
+	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Transactional
-    public void addComment(String commentFrom, String commentTo, String message) {
-		
-        if (!isValidUsername(commentFrom) || !isValidUsername(commentTo) || message.trim().isEmpty()) {
-            throw new InvalidRequestException("Invalid Request");
-        }
+	public void addComment(String commentFrom, String commentTo, String message) {
 
-        User recipient = userRepository.findByCommentTo(commentTo);
-        
-        Comment newComment = new Comment();
-        newComment.setMessage(message);
-        newComment.setCommentDateTime(new Date());
+		if (!isValidUsername(commentFrom) || !isValidUsername(commentTo) || message.trim().isEmpty()) {
+			throw new InvalidRequestException("Invalid Request");
+		}
 
-        if (recipient != null) {
-            newComment.setPostedByUser(recipient);
-        } else {
-            User newUser = new User();
-            newUser.setCommentFrom(commentFrom);
-            newUser.setCommentTo(commentTo);
-            userRepository.save(newUser);
-            newComment.setPostedByUser(newUser);
-        }
+		User recipient = userRepository.findByCommentTo(commentTo);
 
-        commentRepository.save(newComment);
-    }
-	
+		Comment newComment = new Comment();
+		newComment.setMessage(message);
+		newComment.setCommentDateTime(new Date());
+
+		if (recipient != null) {
+			newComment.setPostedByUser(recipient);
+		} else {
+			User newUser = new User();
+			newUser.setCommentFrom(commentFrom);
+			newUser.setCommentTo(commentTo);
+			userRepository.save(newUser);
+			newComment.setPostedByUser(newUser);
+		}
+
+		commentRepository.save(newComment);
+	}
+
 	public List<Comment> getCommentsByRecipient(String commentTo) {
 
-        if (!isValidUsername(commentTo)) {
-            throw new InvalidRequestException("Invalid Request");
-        }
-        return commentRepository.findByPostedByUserCommentTo(commentTo);
-    }
+		if (!isValidUsername(commentTo)) {
+			throw new InvalidRequestException("Invalid Request");
+		}
+		return commentRepository.findByPostedByUserCommentTo(commentTo);
+	}
 
-    private boolean isValidUsername(String username) {
-        return username != null && username.matches("^[a-zA-Z]+");
-    }
+	private boolean isValidUsername(String username) {
+		return username != null && username.matches("^[a-zA-Z]+");
+	}
 }
